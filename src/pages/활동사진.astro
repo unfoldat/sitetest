@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+const photos = (await getCollection('gallery')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+---
+<Base title="활동사진 — 좋은비전 자립생활센터" description="좋은비전 자립생활센터의 활동 사진을 소개합니다." current="활동사진">
+<div class="page-banner"><div class="wrap"><p class="breadcrumb"><a href={`${base}index.html`}>홈</a> › 활동사진</p><h1>활동사진</h1></div></div>
+
+<main id="main" class="page-body"><div class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">활동사진</span>
+    <h2 style="font-size:1.6rem;margin:0;">센터 활동 모습</h2>
+    <p style="color:var(--ink-soft);">모든 사진에는 스크린리더가 읽어주는 설명(대체텍스트)이 함께 등록됩니다.</p>
+  </div>
+  {photos.length === 0 ? (
+    <p>아직 등록된 사진이 없습니다.</p>
+  ) : (
+    <ul class="gallery-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem;list-style:none;padding:0;">
+      {photos.map((photo) => (
+        <li>
+          <figure style="margin:0;">
+            <img src={photo.data.image} alt={photo.data.alt} loading="lazy" style="width:100%;border-radius:8px;display:block;" />
+            <figcaption style="margin-top:.5rem;">
+              <strong>{photo.data.title}</strong>
+              <div class="date" style="color:var(--ink-soft);font-size:.9rem;">{fmt(photo.data.date)}</div>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  )}
+</div></main>
+</Base>
