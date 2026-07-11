@@ -1,0 +1,28 @@
+# ============================================================
+# Sveltia CMS 설정 — 좋은비전 자립생활센터
+# 직원이 코드를 몰라도 제목·사진·내용만 채우면 글이 올라갑니다.
+# ============================================================
+
+backend:
+  name: github
+  repo: unfoldat/sitetest
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/sitetest/images/uploads"
+
+locale: "ko"
+
+collections:
+  - name: "notice"
+    label: "센터소식"
+    label_singular: "소식"
+    folder: "src/content/notice"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: "title", label: "제목", widget: "string" }
+      - { name: "date", label: "작성일", widget: "datetime", format: "YYYY-MM-DD" }
+      - { name: "category", label: "분류", widget: "select", options: ["공지", "활동"], default: "공지" }
+      - { name: "summary", label: "요약(한 줄)", widget: "string", required: false }
+      - { name: "body", label: "내용", widget: "markdown" }

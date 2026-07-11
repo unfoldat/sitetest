@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('notice');
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const base = import.meta.env.BASE_URL;
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+---
+<Base title={`${post.data.title} — 좋은비전 자립생활센터`} description={post.data.summary ?? ''} current="센터소식">
+<div class="page-banner"><div class="wrap">
+  <p class="breadcrumb"><a href={`${base}index.html`}>홈</a> › <a href={`${base}센터소식.html`}>센터소식</a> › {post.data.title}</p>
+  <h1>{post.data.title}</h1>
+</div></div>
+
+<main id="main" class="page-body"><div class="wrap">
+  <article class="notice-article">
+    <p class="meta">
+      <span class={post.data.category === '공지' ? 'badge notice' : 'badge'}>{post.data.category}</span>
+      <time datetime={fmt(post.data.date)}>{fmt(post.data.date)}</time>
+    </p>
+    <div class="prose">
+      <Content />
+    </div>
+    <p style="margin-top:2rem;"><a class="btn btn-ghost" href={`${base}센터소식.html`}>← 목록으로</a></p>
+  </article>
+</div></main>
+</Base>

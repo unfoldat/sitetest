@@ -1,0 +1,74 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  current?: string; // 현재 페이지 식별자 (aria-current 표시용)
+}
+const { title, description = '', current = '' } = Astro.props;
+const base = import.meta.env.BASE_URL; // "/sitetest/"
+const nav = [
+  { id: '센터소개', href: `${base}센터소개.html`, label: '센터소개' },
+  { id: '사업안내', href: `${base}사업안내.html`, label: '사업안내' },
+  { id: '센터소식', href: `${base}센터소식.html`, label: '센터소식' },
+  { id: '후원참여', href: `${base}후원참여.html`, label: '후원·참여' },
+  { id: '오시는길', href: `${base}오시는길.html`, label: '오시는 길' },
+];
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href={`${base}styles.css`}>
+<script src={`${base}a11y.js`} defer is:inline></script>
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+<div id="a11y-live" class="sr-only" aria-live="polite"></div>
+
+<div class="utility">
+  <div class="wrap">
+    <div class="contact">
+      <span>📞 대표전화 032-000-0000</span>
+      <span>✉️ <a href="mailto:info@goodvision.or.kr">info@goodvision.or.kr</a></span>
+    </div>
+    <div class="a11y-controls">
+      <span class="sr-only">글자 크기 조절</span>
+      <button id="txt-dec" type="button" aria-label="글자 작게">가–</button>
+      <button id="txt-inc" type="button" aria-label="글자 크게">가+</button>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap masthead">
+    <a class="brand" href={`${base}index.html`}>
+      <span class="logo" aria-hidden="true">좋</span>
+      <span class="name">좋은비전 자립생활센터<span class="tag">시각장애인 자립생활 지원</span></span>
+    </a>
+    <nav class="primary" aria-label="주메뉴">
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href} aria-current={current === item.id ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<slot />
+
+<footer class="site"><div class="wrap">
+  <div class="fgrid">
+    <div><h2>좋은비전 자립생활센터</h2><p>시각장애인 당사자가 스스로 선택하고 주도하는 삶을 살아갈 수 있도록 함께합니다.</p><p>업무시간 : 평일 09:00 – 18:00</p></div>
+    <div><h2>바로가기</h2><ul>{nav.slice(0, 4).map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul></div>
+    <div><h2>연락처</h2><ul><li>전화 : 032-000-0000</li><li>이메일 : <a href="mailto:info@goodvision.or.kr">info@goodvision.or.kr</a></li><li>주소 : 인천광역시 ○○구 ○○로 00</li></ul></div>
+  </div>
+  <p class="legal">© 2026 좋은비전 자립생활센터. 한국형 웹 접근성 지침(KWCAG)을 준수합니다.</p>
+</div></footer>
+</body>
+</html>
