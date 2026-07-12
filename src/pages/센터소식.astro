@@ -8,17 +8,17 @@ const posts = (await getCollection('notice')).sort(
 );
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
 ---
-<Base title="센터소식 — 좋은비전 자립생활센터" description="좋은비전 자립생활센터의 공지사항과 활동소식을 전합니다." current="센터소식">
+<Base title="센터소식 메타 제목" description="센터소식 메타 설명" current="센터소식">
 <div class="page-banner"><div class="wrap"><p class="breadcrumb"><a href={`${base}index.html`}>홈</a> › 센터소식</p><h1>센터소식</h1></div></div>
 
 <main id="main" class="page-body"><div class="wrap">
   <div class="section-head">
-    <span class="eyebrow">공지사항 · 활동소식</span>
-    <h2 style="font-size:1.6rem;margin:0;">우리 센터의 소식</h2>
-    <p style="color:var(--ink-soft);">관리자 화면에서 제목·사진·내용만 입력하면 이 목록에 자동으로 올라옵니다.</p>
+    <span class="eyebrow">센터소식 소제목</span>
+    <h2 style="font-size:1.6rem;margin:0;">센터소식 안내제목</h2>
+    <p style="color:var(--ink-soft);">센터소식 안내문구</p>
   </div>
   {posts.length === 0 ? (
-    <p>아직 등록된 소식이 없습니다.</p>
+    <p>센터소식 빈 목록 안내문구</p>
   ) : (
     <ul class="news-list">
       {posts.map((post) => (

@@ -34,11 +34,11 @@ const nav = [
 <div class="utility">
   <div class="wrap">
     <div class="contact">
-      <span>📞 대표전화 032-000-0000</span>
-      <span>✉️ <a href="mailto:info@goodvision.or.kr">info@goodvision.or.kr</a></span>
+      <span>📞 유틸리티바 전화번호</span>
+      <span>✉️ <a href="mailto:info@goodvision.or.kr">유틸리티바 이메일</a></span>
     </div>
     <div class="a11y-controls">
-      <span class="sr-only">글자 크기 조절</span>
+      <span class="sr-only">글자 크기 조절 버튼 영역</span>
       <button id="txt-dec" type="button" aria-label="글자 작게">가–</button>
       <button id="txt-inc" type="button" aria-label="글자 크게">가+</button>
     </div>
@@ -48,8 +48,8 @@ const nav = [
 <header class="site">
   <div class="wrap masthead">
     <a class="brand" href={`${base}index.html`}>
-      <span class="logo" aria-hidden="true">좋</span>
-      <span class="name">좋은비전 자립생활센터<span class="tag">시각장애인 자립생활 지원</span></span>
+      <span class="logo" aria-hidden="true">로고</span>
+      <span class="name">사이트명<span class="tag">사이트 슬로건</span></span>
     </a>
     <nav class="primary" aria-label="주메뉴">
       <ul>
@@ -65,11 +65,11 @@ const nav = [
 
 <footer class="site"><div class="wrap">
   <div class="fgrid">
-    <div><h2>좋은비전 자립생활센터</h2><p>시각장애인 당사자가 스스로 선택하고 주도하는 삶을 살아갈 수 있도록 함께합니다.</p><p>업무시간 : 평일 09:00 – 18:00</p></div>
-    <div><h2>바로가기</h2><ul>{nav.slice(0, 4).map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul></div>
-    <div><h2>연락처</h2><ul><li>전화 : 032-000-0000</li><li>이메일 : <a href="mailto:info@goodvision.or.kr">info@goodvision.or.kr</a></li><li>주소 : 인천광역시 ○○구 ○○로 00</li></ul></div>
+    <div><h2>푸터 기관명</h2><p>푸터 소개문구</p><p>푸터 업무시간</p></div>
+    <div><h2>푸터 바로가기 제목</h2><ul>{nav.slice(0, 4).map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul></div>
+    <div><h2>푸터 연락처 제목</h2><ul><li>푸터 전화번호</li><li><a href="mailto:info@goodvision.or.kr">푸터 이메일</a></li><li>푸터 주소</li></ul></div>
   </div>
-  <p class="legal">© 2026 좋은비전 자립생활센터. 한국형 웹 접근성 지침(KWCAG)을 준수합니다.</p>
+  <p class="legal">푸터 저작권·인증문구</p>
 </div></footer>
 </body>
 </html>
